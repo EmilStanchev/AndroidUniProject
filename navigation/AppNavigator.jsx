@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const HomeStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="Home" component={Home} />
-    <Stack.Screen name="LandmarkDetail" component={LandmarkDetailScreen} />
+    <Stack.Screen name="Landmark details" component={LandmarkDetailScreen} />
   </Stack.Navigator>
 );
 
@@ -46,8 +46,16 @@ const TabNavigator = () => (
       inactiveTintColor: "gray",
     }}
   >
-    <Tab.Screen name="Home" component={HomeStack} />
-    <Tab.Screen name="Profile" component={ProfileStack} />
+    <Tab.Screen
+      name="HomePage"
+      component={HomeStack}
+      options={{ headerShown: false }}
+    />
+    <Tab.Screen
+      name="ProfilePage"
+      component={ProfileStack}
+      options={{ headerShown: false }}
+    />
   </Tab.Navigator>
 );
 

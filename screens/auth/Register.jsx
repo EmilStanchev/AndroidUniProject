@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { auth } from "../../FirebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -14,9 +15,10 @@ const RegisterScreen = ({ navigation }) => {
 
   const handleRegister = async () => {
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
       navigation.navigate("Main");
     } catch (error) {
+      console.log(error);
       alert(error.message);
     }
   };

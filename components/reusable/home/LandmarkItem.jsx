@@ -6,7 +6,9 @@ const LandmarkItem = ({ item, navigation }) => {
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate("LandmarkDetail", { landmark: item })}
+      onPress={() =>
+        navigation.navigate("Landmark details", { landmark: item })
+      }
     >
       <View style={styles.card}>
         <View style={styles.imageContainer}>
