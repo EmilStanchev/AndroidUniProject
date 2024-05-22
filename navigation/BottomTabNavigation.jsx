@@ -51,7 +51,7 @@ const BottomTabNavigation = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={Home} // Assuming Home is used for profile, ideally use a Profile component
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <Entypo name="location-pin" size={24} color="black" />

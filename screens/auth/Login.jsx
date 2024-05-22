@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { auth } from "../../FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -14,8 +15,8 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      navigation.navigate("Register");
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.navigate("Main");
     } catch (error) {
       alert(error.message);
     }

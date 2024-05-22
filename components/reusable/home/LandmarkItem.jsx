@@ -2,6 +2,11 @@ import React from "react";
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import {
+  getLikedLandmarks,
+  toggleLike,
+} from "../../../services/likedLandmarks"; // Import the like service
+
 const LandmarkItem = ({ item, navigation }) => {
   return (
     <TouchableOpacity
@@ -13,7 +18,13 @@ const LandmarkItem = ({ item, navigation }) => {
       <View style={styles.card}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: item?.imageUrl }} style={styles.image} />
-          <TouchableOpacity style={styles.likesContainer}>
+          <TouchableOpacity
+            style={styles.likesContainer}
+            onPress={() => {
+              toggleLike(item?.id);
+              getLikedLandmarks();
+            }}
+          >
             <AntDesign name="heart" size={22} color="#FF6B6B" />
           </TouchableOpacity>
         </View>

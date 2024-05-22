@@ -9,7 +9,7 @@ import WelcomeScreen from "../screens/Welcome";
 import LoginScreen from "../screens/auth/Login";
 import RegisterScreen from "../screens/auth/Register";
 import Home from "../screens/Home";
-import Profile from "../screens/Profile"; // Assuming you have a Profile screen
+import Profile from "../screens/Profile";
 import LandmarkDetailScreen from "../screens/LandmarkDetails";
 
 const Stack = createStackNavigator();
@@ -33,18 +33,16 @@ const TabNavigator = () => (
     screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
         let iconName;
-        if (route.name === "Home") {
+        if (route.name === "HomePage") {
           iconName = "home";
-        } else if (route.name === "Profile") {
+        } else if (route.name === "ProfilePage") {
           iconName = "person";
         }
         return <Ionicons name={iconName} size={size} color={color} />;
       },
+      tabBarActiveTintColor: "tomato",
+      tabBarInactiveTintColor: "gray",
     })}
-    tabBarOptions={{
-      activeTintColor: "tomato",
-      inactiveTintColor: "gray",
-    }}
   >
     <Tab.Screen
       name="HomePage"

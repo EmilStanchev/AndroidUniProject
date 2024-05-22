@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
+import { useNavigation } from "@react-navigation/native";
 
 import LandmarkItem from "../components/reusable/home/LandmarkItem";
 import useLandmarks from "../hooks/useLandmarks";
