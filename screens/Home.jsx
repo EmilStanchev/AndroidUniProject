@@ -3,38 +3,11 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
 
 import LandmarkItem from "../components/reusable/home/LandmarkItem";
-const landmarks = [
-  {
-    id: "1",
-    title: "Eiffel Tower",
-    description: "An iconic symbol of Paris.",
-    likes: 1024,
-    place: "Paris, France",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/800px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg",
-  },
-  {
-    id: "2",
-    title: "Statue of Liberty",
-    description: "A symbol of freedom in the USA.",
-    likes: 940,
-    place: "New York, USA",
-    image:
-      "https://cdn.britannica.com/31/94231-050-C6B60B89/Statue-of-Liberty-Island-Upper-New-York.jpg",
-  },
-  {
-    id: "3",
-    title: "Statue ",
-    description: "A symbol of freedom in the USA.",
-    likes: 940,
-    place: "New York, USA",
-    image:
-      "https://cdn.britannica.com/31/94231-050-C6B60B89/Statue-of-Liberty-Island-Upper-New-York.jpg",
-  },
-];
+import useLandmarks from "../hooks/useLandmarks";
+
 const Home = () => {
   const navigation = useNavigation();
-
+  const { landmarks, loading, error } = useLandmarks();
   return (
     <View style={styles.container}>
       <FlatList

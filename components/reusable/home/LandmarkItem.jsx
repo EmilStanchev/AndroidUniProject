@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-
+import { Entypo } from "@expo/vector-icons";
 const LandmarkItem = ({ item, navigation }) => {
   return (
     <TouchableOpacity
@@ -9,15 +9,19 @@ const LandmarkItem = ({ item, navigation }) => {
       onPress={() => navigation.navigate("LandmarkDetail", { landmark: item })}
     >
       <View style={styles.card}>
-        <Image source={{ uri: item?.image }} style={styles.image} />
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: item?.imageUrl }} style={styles.image} />
+          <TouchableOpacity style={styles.likesContainer}>
+            <AntDesign name="heart" size={22} color="#FF6B6B" />
+          </TouchableOpacity>
+        </View>
         <View style={styles.cardContent}>
           <Text style={styles.title}>{item?.title}</Text>
           <Text style={styles.description}>{item?.description}</Text>
-          <TouchableOpacity style={styles.likesContainer}>
-            <AntDesign name="heart" size={16} color="#FF6B6B" />
-            <Text style={styles.likes}>{item.likes}</Text>
-          </TouchableOpacity>
-          <Text style={styles.place}>{item?.place}</Text>
+          <Text style={styles.place}>
+            <Entypo name="location-pin" size={24} color="black" />{" "}
+            {item?.location}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -43,10 +47,10 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
     marginBottom: 5,
-    color: "#333",
+    color: "black",
   },
   description: {
     fontSize: 14,
@@ -59,12 +63,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   place: {
-    fontSize: 14,
-    color: "#888",
+    fontSize: 18,
+    color: "black",
+    fontWeight: "bold",
   },
   likesContainer: {
+    position: "absolute",
+    top: 10,
+    right: 10,
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.7)", // Optional: to improve visibility
+    padding: 5,
+    borderRadius: 5,
   },
   likes: {
     fontSize: 14,
