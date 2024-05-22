@@ -1,13 +1,11 @@
 import React from "react";
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
-const LandmarkItem = ({ item }) => {
-  const navigation = useNavigation();
-
+const LandmarkItem = ({ item, navigation }) => {
   return (
     <TouchableOpacity
+      style={styles.card}
       onPress={() => navigation.navigate("LandmarkDetail", { landmark: item })}
     >
       <View style={styles.card}>
