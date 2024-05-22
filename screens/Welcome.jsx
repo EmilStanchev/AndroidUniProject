@@ -15,9 +15,12 @@ const WelcomeScreen = ({ navigation }) => {
       style={styles.background}
     >
       <View style={styles.overlay}>
+        <View style={styles.centeredView}>
+          <Text style={styles.welcomeText}>Welcome to LandSnap</Text>
+        </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.buttonText}>Let's start</Text>
         </TouchableOpacity>
@@ -29,21 +32,36 @@ const WelcomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   overlay: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "space-between",
     width: "100%",
     height: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  welcomeText: {
+    color: "#fff",
+    fontSize: 32,
+    fontWeight: "bold",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+    textAlign: "center",
+    paddingHorizontal: 20,
   },
   button: {
     backgroundColor: "#1E90FF",
     padding: 15,
     borderRadius: 5,
+    position: "absolute",
+    bottom: 30,
+    right: 30,
   },
   buttonText: {
     color: "#fff",
@@ -51,4 +69,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
 export default WelcomeScreen;
