@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ImageBackground,
   FlatList,
+  Button,
 } from "react-native";
 import { auth } from "../FirebaseConfig.js";
 import useLikedLandmarks from "../hooks/useLikedLandmarks.js";
@@ -15,10 +16,10 @@ import LandMarkItem from "../components/reusable/home/LandmarkItem.jsx";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
 
 const Profile = () => {
-  const { likedLandmarks, loading, error } = useLikedLandmarks();
+  const { likedLandmarks, refetch } = useLikedLandmarks();
   const navigation = useNavigation();
 
-  console.log(likedLandmarks.length);
+  console.log(likedLandmarks?.length);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const Profile = () => {
             </Text>
           </View>
         </ImageBackground>
+        <Button title="Refresh Liked Landmarks" onPress={refetch} />
 
         <FlatList
           style={styles.list}

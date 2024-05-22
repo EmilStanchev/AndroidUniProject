@@ -1,27 +1,14 @@
-import { useState, useEffect } from "react";
+// hooks/useLikedLandmarks.js
+import { useQuery } from "react-query";
 import { getLikedLandmarks } from "../services/likedLandmarks";
 
 const useLikedLandmarks = () => {
-  const [likedLandmarks, setLikedLandmarks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: likedLandmarks = [], refetch } = useQuery(
+    "likedLandmarks",
+    getLikedLandmarks
+  );
 
-  useEffect(() => {
-    const fetchLikedLandmarks = async () => {
-      try {
-        const landmarks = await getLikedLandmarks();
-        setLikedLandmarks(landmarks);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLikedLandmarks();
-  }, []);
-
-  return { likedLandmarks, loading, error };
+  return { likedLandmarks, refetch };
 };
 
 export default useLikedLandmarks;

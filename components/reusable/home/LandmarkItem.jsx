@@ -22,7 +22,6 @@ const LandmarkItem = ({ item, navigation }) => {
             style={styles.likesContainer}
             onPress={() => {
               toggleLike(item?.id);
-              getLikedLandmarks();
             }}
           >
             <AntDesign name="heart" size={22} color="#FF6B6B" />
