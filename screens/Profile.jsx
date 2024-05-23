@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
-  ScrollView,
   Image,
   View,
   Text,
@@ -9,18 +8,21 @@ import {
   ImageBackground,
   FlatList,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import { auth } from "../FirebaseConfig.js";
 import useLikedLandmarks from "../hooks/useLikedLandmarks.js";
 import LandMarkItem from "../components/reusable/home/LandmarkItem.jsx";
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
+import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
+import EditProfileModal from "../components/reusable/profile/EditProfileModal.jsx"; // Import the modal component
+import LikedLandmark from "../components/reusable/profile/LikedLandmark.jsx";
 
 const Profile = () => {
   const { likedLandmarks, refetch } = useLikedLandmarks();
   const navigation = useNavigation();
-
-  console.log(likedLandmarks?.length);
   const [user, setUser] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const currentUser = auth.currentUser;
@@ -28,6 +30,10 @@ const Profile = () => {
       setUser(currentUser);
     }
   }, []);
+
+  const handleSave = (newDisplayName) => {
+    setUser({ ...user, displayName: newDisplayName });
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -37,7 +43,6 @@ const Profile = () => {
             uri: "https://img.freepik.com/free-photo/snowy-mountain-peak-starry-galaxy-majesty-generative-ai_188544-9650.jpg",
           }}
           style={styles.headerBackground}
-          imageStyle={styles.headerImage}
         >
           <View style={styles.headerContent}>
             <Image
@@ -48,26 +53,47 @@ const Profile = () => {
                   "https://cdn-icons-png.flaticon.com/512/3682/3682281.png",
               }}
             />
-            <Text style={styles.username}>
-              {user?.displayName || "yourusername"}
-            </Text>
+            <View
+              style={{
+                backgroundColor: "#C0C0C0",
+                borderRadius: 10,
+                padding: 10,
+                marginTop: 5,
+              }}
+            >
+              <Text style={styles.username}>
+                {user?.displayName || user?.email}
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.editIcon}
+              onPress={() => setModalVisible(true)}
+            >
+              <MaterialIcons name="edit" size={24} color="white" />
+            </TouchableOpacity>
           </View>
         </ImageBackground>
         <Button title="Refresh Liked Landmarks" onPress={refetch} />
-
         <FlatList
           style={styles.list}
           data={likedLandmarks}
           renderItem={({ item }) => (
-            <LandMarkItem item={item} navigation={navigation} />
+            <LikedLandmark item={item} navigation={navigation} />
           )}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.list}
         />
       </View>
+      <EditProfileModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onSave={handleSave}
+        currentDisplayName={user?.displayName || ""}
+      />
     </SafeAreaView>
   );
 };
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -83,14 +109,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
   },
-  headerImage: {
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
   headerContent: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
@@ -102,48 +125,15 @@ const styles = StyleSheet.create({
     borderColor: "white",
   },
   username: {
-    marginTop: 10,
     fontSize: 24,
     color: "white",
     fontWeight: "bold",
   },
-  section: {
-    margin: 20,
-    padding: 20,
-    backgroundColor: "white",
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  sectionContent: {
-    fontSize: 16,
-    color: "#333",
-  },
-  interests: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  interest: {
-    backgroundColor: "#4b7bec",
-    color: "white",
-    padding: 10,
-    margin: 5,
-    borderRadius: 20,
-    fontSize: 14,
-  },
-  contact: {},
-  contactItem: {
-    fontSize: 16,
-    color: "#333",
-    marginBottom: 5,
+  editIcon: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
 });
+
 export default Profile;
