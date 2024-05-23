@@ -16,6 +16,7 @@ const landmarks = [
     latitude: 42.1333,
     longitude: 23.4,
     popular: [],
+    type: "Monastery",
   },
   {
     country_name: "Bulgaria",
@@ -30,6 +31,7 @@ const landmarks = [
     latitude: 42.6977,
     longitude: 23.3219,
     popular: [],
+    type: "Cathedral",
   },
   {
     country_name: "Bulgaria",
@@ -44,6 +46,7 @@ const landmarks = [
     latitude: 42.1354,
     longitude: 24.7453,
     popular: [],
+    type: "Historic Town",
   },
   {
     country_name: "Serbia",
@@ -59,6 +62,7 @@ const landmarks = [
     latitude: 44.822,
     longitude: 20.4493,
     popular: [],
+    type: "Fortress",
   },
   {
     country_name: "Serbia",
@@ -74,6 +78,7 @@ const landmarks = [
     latitude: 43.3186,
     longitude: 21.8958,
     popular: [],
+    type: "Fortress",
   },
   {
     country_name: "Serbia",
@@ -89,6 +94,7 @@ const landmarks = [
     latitude: 43.7951,
     longitude: 19.5309,
     popular: [],
+    type: "Village",
   },
   {
     country_name: "Germany",
@@ -104,6 +110,7 @@ const landmarks = [
     latitude: 47.5576,
     longitude: 10.7498,
     popular: [],
+    type: "Castle",
   },
   {
     country_name: "Germany",
@@ -118,6 +125,7 @@ const landmarks = [
     latitude: 50.9413,
     longitude: 6.9583,
     popular: [],
+    type: "Cathedral",
   },
   {
     country_name: "Spain",
@@ -133,6 +141,7 @@ const landmarks = [
     latitude: 41.4036,
     longitude: 2.1744,
     popular: [],
+    type: "Basilica",
   },
   {
     country_name: "Spain",
@@ -147,8 +156,8 @@ const landmarks = [
     latitude: 41.4145,
     longitude: 2.1527,
     popular: [],
+    type: "Park",
   },
-
   {
     country_name: "France",
     title: "Eiffel Tower",
@@ -163,6 +172,7 @@ const landmarks = [
     latitude: 48.858844,
     longitude: 2.294351,
     popular: [],
+    type: "Tower",
   },
   {
     country_name: "France",
@@ -178,6 +188,7 @@ const landmarks = [
     latitude: 48.860642,
     longitude: 2.335769,
     popular: [],
+    type: "Museum",
   },
   {
     country_name: "France",
@@ -193,6 +204,7 @@ const landmarks = [
     latitude: 48.6361,
     longitude: -1.512,
     popular: [],
+    type: "Abbey",
   },
   {
     country_name: "Italy",
@@ -208,6 +220,7 @@ const landmarks = [
     latitude: 41.8902,
     longitude: 12.4923,
     popular: [],
+    type: "Amphitheater",
   },
   {
     country_name: "Italy",
@@ -222,6 +235,7 @@ const landmarks = [
     latitude: 45.4408,
     longitude: 12.3155,
     popular: [],
+    type: "Canals",
   },
   {
     country_name: "Italy",
@@ -237,8 +251,8 @@ const landmarks = [
     latitude: 43.7695,
     longitude: 11.2558,
     popular: [],
+    type: "Historic Center",
   },
-
   {
     country_name: "USA",
     title: "Statue of Liberty",
@@ -253,6 +267,7 @@ const landmarks = [
     latitude: 40.6892,
     longitude: -74.0445,
     popular: [],
+    type: "Statue",
   },
   {
     country_name: "USA",
@@ -268,6 +283,7 @@ const landmarks = [
     latitude: 36.0551,
     longitude: -112.1401,
     popular: [],
+    type: "Natural Wonder",
   },
   {
     country_name: "USA",
@@ -282,6 +298,7 @@ const landmarks = [
     latitude: 44.428,
     longitude: -110.5885,
     popular: [],
+    type: "National Park",
   },
   {
     country_name: "Greece",
@@ -297,6 +314,7 @@ const landmarks = [
     latitude: 37.9715,
     longitude: 23.7263,
     popular: [],
+    type: "Citadel",
   },
   {
     country_name: "Greece",
@@ -312,6 +330,7 @@ const landmarks = [
     latitude: 36.3932,
     longitude: 25.4615,
     popular: [],
+    type: "Island",
   },
 ];
 

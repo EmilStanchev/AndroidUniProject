@@ -29,9 +29,11 @@ const LandmarkItem = ({ item, navigation }) => {
         </View>
         <View style={styles.cardContent}>
           <Text style={styles.title}>{item?.title}</Text>
-          <Text style={styles.description}>{item?.description}</Text>
+          <Text style={styles.description}>
+            {item?.description?.slice(0, 50)}...
+          </Text>
           <Text style={styles.place}>
-            <Entypo name="location-pin" size={24} color="black" />{" "}
+            <Entypo name="location-pin" size={24} color="black" />
             {item?.location}
           </Text>
         </View>
