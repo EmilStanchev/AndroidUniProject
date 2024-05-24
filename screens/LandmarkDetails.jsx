@@ -19,7 +19,7 @@ export default function LandmarkDetailScreen({ route }) {
         </View>
         <View style={styles.infoContainer}>
           <AntDesign name="heart" size={16} color="#FF6B6B" />
-          <Text style={styles.info}>{landmark.likes}</Text>
+          <Text style={styles.info}>{landmark?.likes?.length}</Text>
         </View>
       </View>
     </ScrollView>

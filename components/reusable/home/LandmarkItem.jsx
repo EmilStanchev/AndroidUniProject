@@ -2,17 +2,17 @@ import React from "react";
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import {
-  getLikedLandmarks,
-  likeOrUnlike,
-} from "../../../services/likedLandmarks"; // Import the like service
+import { likeOrUnlike } from "../../../services/likedLandmarks"; // Import the like service
 import useLikedLandmarks from "../../../hooks/useLikedLandmarks";
+import useLandmarks from "../../../hooks/useLandmarks";
 
 const LandmarkItem = ({ item, navigation }) => {
   const { refetch } = useLikedLandmarks();
+  const { landmarksRefetch } = useLandmarks();
   const toggleLike = async (landmarkId) => {
     await likeOrUnlike(landmarkId);
     refetch();
+    landmarksRefetch();
   };
   return (
     <TouchableOpacity

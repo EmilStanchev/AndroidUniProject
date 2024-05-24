@@ -1,29 +1,15 @@
-// useLandmarks.js
-
-import { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 import { getLandmarks } from "../services/landmarks";
 
 const useLandmarks = () => {
-  const [landmarks, setLandmarks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    data: landmarks,
+    isLoading: loading,
+    error,
+    refetch: landmarksRefetch,
+  } = useQuery("landmarks", getLandmarks);
 
-  useEffect(() => {
-    const fetchLandmarks = async () => {
-      try {
-        const data = await getLandmarks();
-        setLandmarks(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLandmarks();
-  }, []);
-
-  return { landmarks, loading, error };
+  return { landmarks, loading, error, landmarksRefetch };
 };
 
 export default useLandmarks;

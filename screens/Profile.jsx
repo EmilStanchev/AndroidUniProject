@@ -77,7 +77,6 @@ const Profile = () => {
             </TouchableOpacity>
           </View>
         </ImageBackground>
-        <Button title="Refresh Liked Landmarks" onPress={refetch} />
         <FlatList
           style={styles.list}
           data={likedLandmarks}
