@@ -158,7 +158,8 @@ const landmarks = [
     description:
       "Park Güell, another creation by Antoni Gaudí, is a colorful public park in Barcelona. Enjoy the vibrant mosaic sculptures, unique architecture, and panoramic views of the city while experiencing the artistic and playful atmosphere of this park.",
     contact_id: "Contact details",
-    imageUrl: "https://wallpapercave.com/wp/wp4196479.jpg",
+    imageUrl:
+      "https://www.bcn.travel/wp-content/uploads/park-guell-at-sunrise.jpg",
     rating: 4.7,
     review: "0 Reviews",
     location: "Barcelona, Spain",
