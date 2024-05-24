@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   SafeAreaView,
   Image,
@@ -9,6 +9,7 @@ import {
   FlatList,
   Button,
   TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import { auth } from "../FirebaseConfig.js";
 import useLikedLandmarks from "../hooks/useLikedLandmarks.js";
@@ -23,6 +24,7 @@ const Profile = () => {
   const navigation = useNavigation();
   const [user, setUser] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     const currentUser = auth.currentUser;
@@ -38,6 +40,10 @@ const Profile = () => {
     await likeOrUnlike(landmarkId);
     await refetch();
   };
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch().then(() => setRefreshing(false));
+  }, [refreshing]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -89,6 +95,9 @@ const Profile = () => {
           )}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.list}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
       </View>
       <EditProfileModal

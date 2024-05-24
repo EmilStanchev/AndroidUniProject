@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import React, { useCallback, useState } from "react";
+import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import LandmarkItem from "../components/reusable/home/LandmarkItem";
@@ -20,9 +20,10 @@ const filters = [
 
 const Home = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
+  const [refreshing, setRefreshing] = useState(false);
 
   const navigation = useNavigation();
-  const { landmarks, loading, error } = useLandmarks();
+  const { landmarks, loading, error, landmarksRefetch } = useLandmarks();
 
   const filteredLandmarks =
     selectedFilter === "all" || !selectedFilter
@@ -34,6 +35,11 @@ const Home = () => {
       prevFilter === filterType ? "all" : filterType
     );
   };
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    landmarksRefetch().then(() => setRefreshing(false));
+  }, [refreshing]);
 
   return (
     <View style={styles.container}>
@@ -60,6 +66,9 @@ const Home = () => {
         )}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </View>
   );
