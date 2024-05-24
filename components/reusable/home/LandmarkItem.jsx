@@ -4,10 +4,16 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import {
   getLikedLandmarks,
-  toggleLike,
+  likeOrUnlike,
 } from "../../../services/likedLandmarks"; // Import the like service
+import useLikedLandmarks from "../../../hooks/useLikedLandmarks";
 
 const LandmarkItem = ({ item, navigation }) => {
+  const { refetch } = useLikedLandmarks();
+  const toggleLike = async (landmarkId) => {
+    await likeOrUnlike(landmarkId);
+    refetch();
+  };
   return (
     <TouchableOpacity
       style={styles.card}

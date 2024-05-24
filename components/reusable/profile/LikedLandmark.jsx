@@ -8,8 +8,14 @@ import {
 } from "react-native";
 import CustomText from "../../ui/CustomText";
 import TestText from "../../ui/TestText";
+import {
+  likeOrUnlike,
+  getLikedLandmarks,
+} from "../../../services/likedLandmarks";
+import useLikedLandmarks from "../../../hooks/useLikedLandmarks";
 
-const LikedLandmark = ({ item, navigation }) => {
+const LikedLandmark = ({ item, navigation, onDelete }) => {
+  const { refetch } = useLikedLandmarks();
   return (
     <TouchableOpacity
       style={styles.container}
@@ -38,7 +44,13 @@ const LikedLandmark = ({ item, navigation }) => {
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <Text style={styles.removeButton}>Remove</Text>
+        <TouchableOpacity
+          onPress={() => {
+            onDelete(item?.id);
+          }}
+        >
+          <Text style={styles.removeButton}>Remove</Text>
+        </TouchableOpacity>
         <Text style={styles.detailsButton}>Details</Text>
       </View>
     </TouchableOpacity>

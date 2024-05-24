@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import EditProfileModal from "../components/reusable/profile/EditProfileModal.jsx"; // Import the modal component
 import LikedLandmark from "../components/reusable/profile/LikedLandmark.jsx";
-
+import { likeOrUnlike, toggleLike } from "../services/likedLandmarks.js";
 const Profile = () => {
   const { likedLandmarks, refetch } = useLikedLandmarks();
   const navigation = useNavigation();
@@ -33,6 +33,10 @@ const Profile = () => {
 
   const handleSave = (newDisplayName) => {
     setUser({ ...user, displayName: newDisplayName });
+  };
+  const onDelete = async (landmarkId) => {
+    await likeOrUnlike(landmarkId);
+    await refetch();
   };
 
   return (
@@ -78,7 +82,11 @@ const Profile = () => {
           style={styles.list}
           data={likedLandmarks}
           renderItem={({ item }) => (
-            <LikedLandmark item={item} navigation={navigation} />
+            <LikedLandmark
+              item={item}
+              navigation={navigation}
+              onDelete={onDelete}
+            />
           )}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.list}

@@ -17,6 +17,7 @@ const landmarks = [
     longitude: 23.4,
     popular: [],
     type: "Monastery",
+    likes: [],
   },
   {
     country_name: "Bulgaria",
@@ -31,7 +32,8 @@ const landmarks = [
     latitude: 42.6977,
     longitude: 23.3219,
     popular: [],
-    type: "Cathedral",
+    type: "Monastery",
+    likes: [],
   },
   {
     country_name: "Bulgaria",
@@ -46,7 +48,8 @@ const landmarks = [
     latitude: 42.1354,
     longitude: 24.7453,
     popular: [],
-    type: "Historic Town",
+    type: "Historic",
+    likes: [],
   },
   {
     country_name: "Serbia",
@@ -62,7 +65,8 @@ const landmarks = [
     latitude: 44.822,
     longitude: 20.4493,
     popular: [],
-    type: "Fortress",
+    type: "Castle",
+    likes: [],
   },
   {
     country_name: "Serbia",
@@ -78,7 +82,8 @@ const landmarks = [
     latitude: 43.3186,
     longitude: 21.8958,
     popular: [],
-    type: "Fortress",
+    type: "Castle",
+    likes: [],
   },
   {
     country_name: "Serbia",
@@ -94,7 +99,8 @@ const landmarks = [
     latitude: 43.7951,
     longitude: 19.5309,
     popular: [],
-    type: "Village",
+    type: "Town",
+    likes: [],
   },
   {
     country_name: "Germany",
@@ -111,6 +117,7 @@ const landmarks = [
     longitude: 10.7498,
     popular: [],
     type: "Castle",
+    likes: [],
   },
   {
     country_name: "Germany",
@@ -125,7 +132,8 @@ const landmarks = [
     latitude: 50.9413,
     longitude: 6.9583,
     popular: [],
-    type: "Cathedral",
+    type: "Monastery",
+    likes: [],
   },
   {
     country_name: "Spain",
@@ -141,7 +149,8 @@ const landmarks = [
     latitude: 41.4036,
     longitude: 2.1744,
     popular: [],
-    type: "Basilica",
+    type: "Monastery",
+    likes: [],
   },
   {
     country_name: "Spain",
@@ -157,6 +166,7 @@ const landmarks = [
     longitude: 2.1527,
     popular: [],
     type: "Park",
+    likes: [],
   },
   {
     country_name: "France",
@@ -172,7 +182,8 @@ const landmarks = [
     latitude: 48.858844,
     longitude: 2.294351,
     popular: [],
-    type: "Tower",
+    type: "Historic",
+    likes: [],
   },
   {
     country_name: "France",
@@ -189,6 +200,7 @@ const landmarks = [
     longitude: 2.335769,
     popular: [],
     type: "Museum",
+    likes: [],
   },
   {
     country_name: "France",
@@ -204,7 +216,8 @@ const landmarks = [
     latitude: 48.6361,
     longitude: -1.512,
     popular: [],
-    type: "Abbey",
+    type: "Monastery",
+    likes: [],
   },
   {
     country_name: "Italy",
@@ -220,7 +233,8 @@ const landmarks = [
     latitude: 41.8902,
     longitude: 12.4923,
     popular: [],
-    type: "Amphitheater",
+    type: "Historic",
+    likes: [],
   },
   {
     country_name: "Italy",
@@ -235,7 +249,8 @@ const landmarks = [
     latitude: 45.4408,
     longitude: 12.3155,
     popular: [],
-    type: "Canals",
+    type: "Town",
+    likes: [],
   },
   {
     country_name: "Italy",
@@ -251,7 +266,8 @@ const landmarks = [
     latitude: 43.7695,
     longitude: 11.2558,
     popular: [],
-    type: "Historic Center",
+    type: "Historic",
+    likes: [],
   },
   {
     country_name: "USA",
@@ -267,7 +283,8 @@ const landmarks = [
     latitude: 40.6892,
     longitude: -74.0445,
     popular: [],
-    type: "Statue",
+    type: "Historic",
+    likes: [],
   },
   {
     country_name: "USA",
@@ -284,6 +301,7 @@ const landmarks = [
     longitude: -112.1401,
     popular: [],
     type: "Natural Wonder",
+    likes: [],
   },
   {
     country_name: "USA",
@@ -298,7 +316,8 @@ const landmarks = [
     latitude: 44.428,
     longitude: -110.5885,
     popular: [],
-    type: "National Park",
+    type: "Park",
+    likes: [],
   },
   {
     country_name: "Greece",
@@ -314,7 +333,8 @@ const landmarks = [
     latitude: 37.9715,
     longitude: 23.7263,
     popular: [],
-    type: "Citadel",
+    type: "Monastery",
+    likes: [],
   },
   {
     country_name: "Greece",
@@ -331,6 +351,7 @@ const landmarks = [
     longitude: 25.4615,
     popular: [],
     type: "Island",
+    likes: [],
   },
 ];
 
