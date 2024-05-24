@@ -1,14 +1,42 @@
 // screens/LandmarkDetailScreen.js
 
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import StarRating from "../components/ui/StarRating";
 import MapView, { Marker } from "react-native-maps";
+import useLandmarks from "../hooks/useLandmarks";
+import RecommendationCard from "../components/reusable/details/RecommendationCard";
+import { useNavigation } from "@react-navigation/native";
+const recommendations = [
+  { id: "1", name: "Recommendation 1" },
+  { id: "2", name: "Recommendation 2" },
+  { id: "3", name: "Recommendation 3" },
+  { id: "4", name: "Recommendation 4" },
+];
 
+// Render item for flatlist
+const renderRecommendationItem = ({ item }) => (
+  <View style={styles.recommendationCard}>
+    <Text style={styles.recommendationText}>{item.name}</Text>
+  </View>
+);
 export default function LandmarkDetailScreen({ route }) {
   const { landmark } = route.params;
+  const { landmarks } = useLandmarks();
+  const navigation = useNavigation();
+
+  const filteredLandmarks = landmarks.filter(
+    (landmarkdb) => landmarkdb?.type === landmark?.type
+  );
 
   return (
     <ScrollView style={styles.container}>
@@ -48,6 +76,17 @@ export default function LandmarkDetailScreen({ route }) {
             />
           </MapView>
         </View>
+        <Text style={styles.sectionTitle}>Recommendations</Text>
+        <FlatList
+          data={filteredLandmarks}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <RecommendationCard landmark={item} navigation={navigation} />
+          )}
+          contentContainerStyle={styles.recommendationContainer}
+        />
       </View>
     </ScrollView>
   );
@@ -106,5 +145,9 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
