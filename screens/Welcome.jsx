@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -5,8 +6,29 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
+import { auth } from "../FirebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 const WelcomeScreen = ({ navigation }) => {
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const handleStart = async () => {
+    console.log("user from welcome", user);
+    if (user) {
+      navigation.navigate("Main");
+    } else {
+      navigation.navigate("Login");
+    }
+  };
+
   return (
     <ImageBackground
       source={{
@@ -18,10 +40,7 @@ const WelcomeScreen = ({ navigation }) => {
         <View style={styles.centeredView}>
           <Text style={styles.welcomeText}>Welcome to LandSnap</Text>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Login")}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleStart}>
           <Text style={styles.buttonText}>Let's start</Text>
         </TouchableOpacity>
       </View>

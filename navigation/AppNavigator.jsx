@@ -11,6 +11,7 @@ import RegisterScreen from "../screens/auth/Register";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import LandmarkDetailScreen from "../screens/LandmarkDetails";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,15 +62,18 @@ const AppNavigator = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
+    const checkLoginStatus = async () => {
+      try {
+        const userLoggedIn = await AsyncStorage.getItem("userLoggedIn");
+        if (userLoggedIn === "true") {
+          setUser(auth.currentUser);
+        }
+      } catch (error) {
+        console.error("Error retrieving login status:", error);
       }
-    });
+    };
 
-    return () => unsubscribe();
+    checkLoginStatus();
   }, []);
 
   return (
@@ -92,6 +96,11 @@ const AppNavigator = () => {
             />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen
+              name="Main"
+              component={TabNavigator}
+              options={{ headerShown: false }}
+            />
           </>
         )}
       </Stack.Navigator>
