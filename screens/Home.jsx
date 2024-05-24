@@ -29,6 +29,12 @@ const Home = () => {
       ? landmarks
       : landmarks.filter((landmark) => landmark.type === selectedFilter);
 
+  const handleFilterPress = (filterType) => {
+    setSelectedFilter((prevFilter) =>
+      prevFilter === filterType ? "all" : filterType
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.filterContainer}>
@@ -38,7 +44,7 @@ const Home = () => {
             <FilterItem
               item={item}
               selectedFilter={selectedFilter}
-              setSelectedFilter={setSelectedFilter}
+              setSelectedFilter={() => handleFilterPress(item.type)}
             />
           )}
           keyExtractor={(item) => item.type}
@@ -58,6 +64,7 @@ const Home = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

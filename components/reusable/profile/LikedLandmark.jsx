@@ -7,6 +7,7 @@ import {
   Text,
 } from "react-native";
 import CustomText from "../../ui/CustomText";
+import TestText from "../../ui/TestText";
 
 const LikedLandmark = ({ item, navigation }) => {
   return (
