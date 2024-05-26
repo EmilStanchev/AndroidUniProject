@@ -17,7 +17,6 @@ export default function App() {
       setUser(user);
     });
   });
-  console.log("user from the app", user);
   return (
     <QueryClientProvider client={queryClient}>
       <AppNavigator />

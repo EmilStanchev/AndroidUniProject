@@ -19,7 +19,6 @@ const WelcomeScreen = ({ navigation }) => {
   });
 
   const handleStart = () => {
-    console.log(user, "user from welcomec");
     if (user) {
       navigation.navigate("Main");
     } else {
