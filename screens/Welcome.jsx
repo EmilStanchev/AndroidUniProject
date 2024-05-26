@@ -6,22 +6,20 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { auth } from "../FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../FirebaseConfig";
 
 const WelcomeScreen = ({ navigation }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
+  });
 
-    return unsubscribe;
-  }, []);
-
-  const handleStart = async () => {
-    console.log("user from welcome", user);
+  const handleStart = () => {
+    console.log(user, "user from welcomec");
     if (user) {
       navigation.navigate("Main");
     } else {

@@ -1,8 +1,15 @@
-const { initializeApp } = require("firebase/app");
+// db importing for not seed
+import { initializeApp } from "firebase/app";
+import { getReactNativePersistence, initializeAuth } from "firebase/auth";
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
+import { getFirestore } from "firebase/firestore";
+
+// import for when I seed data to firebase:
+/*const { initializeApp } = require("firebase/app");
 const { getFirestore } = require("firebase/firestore");
 const { getReactNativePersistence, initializeAuth } = require("firebase/auth");
 const ReactNativeAsyncStorage = require("@react-native-async-storage/async-storage");
-
+*/
 const firebaseConfig = {
   apiKey: "AIzaSyC1yIrOyHcQRvRvdeMNMR2qfilo4nHURhU",
   authDomain: "unifinalproject-4806f.firebaseapp.com",

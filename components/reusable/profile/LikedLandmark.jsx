@@ -7,15 +7,9 @@ import {
   Text,
 } from "react-native";
 import CustomText from "../../ui/CustomText";
-import TestText from "../../ui/TestText";
-import {
-  likeOrUnlike,
-  getLikedLandmarks,
-} from "../../../services/likedLandmarks";
-import useLikedLandmarks from "../../../hooks/useLikedLandmarks";
+import StarRating from "../../ui/StarRating";
 
 const LikedLandmark = ({ item, navigation, onDelete }) => {
-  const { refetch } = useLikedLandmarks();
   return (
     <TouchableOpacity
       style={styles.container}
@@ -41,6 +35,8 @@ const LikedLandmark = ({ item, navigation, onDelete }) => {
               justifyContent: "flex-start",
             }}
           ></View>
+          <StarRating rating={item?.rating} />
+          <Text>({item?.rating})</Text>
         </View>
       </View>
       <View style={styles.buttonsContainer}>
@@ -71,6 +67,7 @@ const styles = StyleSheet.create({
     height: 80,
     resizeMode: "cover",
     borderRadius: 12,
+    marginRight: 10,
   },
   buttonsContainer: {
     display: "flex",

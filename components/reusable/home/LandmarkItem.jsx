@@ -9,6 +9,7 @@ import useLandmarks from "../../../hooks/useLandmarks";
 const LandmarkItem = ({ item, navigation }) => {
   const { refetch } = useLikedLandmarks();
   const { landmarksRefetch } = useLandmarks();
+
   const toggleLike = async (landmarkId) => {
     await likeOrUnlike(landmarkId);
     refetch();

@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { auth } from "../FirebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 import WelcomeScreen from "../screens/Welcome";
 import LoginScreen from "../screens/auth/Login";
@@ -11,7 +12,6 @@ import RegisterScreen from "../screens/auth/Register";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import LandmarkDetailScreen from "../screens/LandmarkDetails";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -59,50 +59,30 @@ const TabNavigator = () => (
 );
 
 const AppNavigator = () => {
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState();
   useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const userLoggedIn = await AsyncStorage.getItem("userLoggedIn");
-        if (userLoggedIn === "true") {
-          setUser(auth.currentUser);
-        }
-      } catch (error) {
-        console.error("Error retrieving login status:", error);
-      }
-    };
-
-    checkLoginStatus();
-  }, []);
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  });
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
-        {user ? (
-          <>
-            <Stack.Screen
-              name="Main"
-              component={TabNavigator}
-              options={{ headerShown: false }}
-            />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              name="Welcome"
-              component={WelcomeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen
-              name="Main"
-              component={TabNavigator}
-              options={{ headerShown: false }}
-            />
-          </>
-        )}
+        <>
+          <Stack.Screen
+            name="Welcome"
+            component={WelcomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen
+            name="Main"
+            component={TabNavigator}
+            options={{ headerShown: false }}
+          />
+        </>
       </Stack.Navigator>
     </NavigationContainer>
   );
