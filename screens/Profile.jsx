@@ -7,18 +7,19 @@ import {
   StyleSheet,
   ImageBackground,
   FlatList,
-  Button,
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
 import { auth } from "../FirebaseConfig.js";
+import { signOut } from "firebase/auth";
 import useLikedLandmarks from "../hooks/useLikedLandmarks.js";
 import LandMarkItem from "../components/reusable/home/LandmarkItem.jsx";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import EditProfileModal from "../components/reusable/profile/EditProfileModal.jsx"; // Import the modal component
+import EditProfileModal from "../components/reusable/profile/EditProfileModal.jsx";
 import LikedLandmark from "../components/reusable/profile/LikedLandmark.jsx";
-import { likeOrUnlike, toggleLike } from "../services/likedLandmarks.js";
+import { likeOrUnlike } from "../services/likedLandmarks.js";
+
 const Profile = () => {
   const { likedLandmarks, refetch } = useLikedLandmarks();
   const navigation = useNavigation();
@@ -36,10 +37,21 @@ const Profile = () => {
   const handleSave = (newDisplayName) => {
     setUser({ ...user, displayName: newDisplayName });
   };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigation.navigate("Login");
+    } catch (error) {
+      console.error("Failed to logout:", error);
+    }
+  };
+
   const onDelete = async (landmarkId) => {
     await likeOrUnlike(landmarkId);
     await refetch();
   };
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     refetch().then(() => setRefreshing(false));
@@ -80,6 +92,9 @@ const Profile = () => {
               onPress={() => setModalVisible(true)}
             >
               <MaterialIcons name="edit" size={24} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.logoutIcon} onPress={handleLogout}>
+              <MaterialIcons name="logout" size={24} color="white" />
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -149,6 +164,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     right: 10,
+  },
+  logoutIcon: {
+    position: "absolute",
+    top: 10,
+    right: 50,
   },
 });
 
