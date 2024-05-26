@@ -1,12 +1,11 @@
 import React from "react";
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { likeOrUnlike } from "../../../services/likedLandmarks"; // Import the like service
+import { AntDesign, Entypo } from "@expo/vector-icons";
+import { likeOrUnlike } from "../../../services/likedLandmarks";
 import useLikedLandmarks from "../../../hooks/useLikedLandmarks";
 import useLandmarks from "../../../hooks/useLandmarks";
 
-const LandmarkItem = ({ item, navigation }) => {
+const LandmarkItem = ({ item, navigation, isLiked }) => {
   const { refetch } = useLikedLandmarks();
   const { landmarksRefetch } = useLandmarks();
 
@@ -15,6 +14,7 @@ const LandmarkItem = ({ item, navigation }) => {
     refetch();
     landmarksRefetch();
   };
+
   return (
     <TouchableOpacity
       style={styles.card}
@@ -27,11 +27,13 @@ const LandmarkItem = ({ item, navigation }) => {
           <Image source={{ uri: item?.imageUrl }} style={styles.image} />
           <TouchableOpacity
             style={styles.likesContainer}
-            onPress={() => {
-              toggleLike(item?.id);
-            }}
+            onPress={() => toggleLike(item?.id)}
           >
-            <AntDesign name="heart" size={22} color="#FF6B6B" />
+            <AntDesign
+              name={isLiked ? "heart" : "hearto"}
+              size={22}
+              color="#FF6B6B"
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.cardContent}>
@@ -48,14 +50,15 @@ const LandmarkItem = ({ item, navigation }) => {
     </TouchableOpacity>
   );
 };
+
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#FFF",
     borderRadius: 10,
     overflow: "hidden",
     marginBottom: 15,
-    elevation: 3, // for Android shadow
-    shadowColor: "#000", // for iOS shadow
+    elevation: 3,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
@@ -78,11 +81,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#666",
   },
-  infoContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   place: {
     fontSize: 18,
     color: "black",
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
     right: 10,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.7)", // Optional: to improve visibility
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
     padding: 5,
     borderRadius: 5,
   },

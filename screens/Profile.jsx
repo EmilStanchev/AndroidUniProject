@@ -128,7 +128,6 @@ const Profile = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "gray",
   },
   list: {
     marginTop: 10,
